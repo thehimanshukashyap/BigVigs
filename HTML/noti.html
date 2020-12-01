@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .noti{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: gray;
+            color: white;
+            font-size: large;
+            border-radius: 5px;
+            border: 2px solid green;
+            height: 2.5rem;
+            padding: 0.5rem;
+            /* width: 0rem; */
+            /* display: none; */
+            position: absolute;
+            right: 10%;
+            top: -15%;
+            transition: ease-in-out 3s;
+        }
+        .show{
+            /* display: flex; */
+            top: 5%;
+        }
+    </style>
+</head>
+<body>
+    <div id="noti" class="noti">
+        <p>Order placed successfully</p>
+    </div>
+    <button id="btn">Click Me</button>
+</body>
+
+<script>
+    let element = document.getElementById("btn");
+    element.onclick = function(){
+        let ele = document.getElementById("noti");
+        // alert("hmm");
+        // document.writeln("hmm");
+        if(ele.classList.contains("show")){
+            ele.classList.remove("show");
+        }
+        ele.classList.add("show");
+        setTimeout(() => {
+            ele.classList.remove("show");
+        }, 3000);
+    }
+</script>
+</html>

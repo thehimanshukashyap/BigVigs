@@ -1,0 +1,216 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: #f8f8ff;
+    box-sizing: border-box;
+    /* overflow: hidden!important; */
+    font-family: Whitney,-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    /* font-family: Arial, Helvetica, sans-serif; */
+}
+
+.searchtext{
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: 2rem;
+    margin: 2rem;
+    outline: none;
+    border: 1px solid green;
+    border-radius: 10px;
+}
+
+.card1{
+    display: block;
+    /* margin: 3rem; */
+    margin: "auto";
+    /* height: 350px; */
+    width: 210px;
+    /* border: 1px solid #ebebeb; */
+    /* border: 2px solid black; */
+    position: relative;
+    border-radius: 2px;
+    /* box-shadow: 0 0 8px rgba(100, 100, 100, 0.5); */
+}
+.imgBox1{
+    margin: 0;
+    padding: 0;
+    /* border: 5px solid yellowgreen; */
+    height: 275px;
+    width: 100%;
+}
+.imgBox1 img{
+    /* position: relative; */
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 2px 2px 0px 0px;
+}
+.cardBody1{
+    display: block;
+    background: #f8f8ff;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    /* border: 2px solid red; */
+}
+.btn2,.btn1{
+    height: 30px;
+    width: 30px;
+    top: 73%;
+    left: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    visibility: hidden;;
+    border-radius: 100%;
+    outline: none!important;
+    border: none;
+    cursor: pointer;
+}
+.btn2 .plus{
+    right: 0.68rem;
+}
+.btn1:hover,.btn2:hover{
+    background: #fc4a4a!important;
+}
+.cardBody1 .title{
+    margin: 0.8rem 0 0 0.8rem;
+    font-weight: 500;
+    line-height: 0.8rem;
+}
+.cardBody1 p{
+    margin: 0 0.8rem;
+    font-weight: lighter;
+    color: #686868;
+    font-size: 0.9rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.strikedPrice{
+    /* margin: 0 0 0 0.5rem; */
+    font-family: Georgia;
+    line-height: 0rem;
+    /* display: block; */
+}
+.price{
+    margin: 0.8rem 0 0 0.8rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 550;
+    /* color: #ff5353; */
+}
+.priceSection{
+    /* display: flex; */
+    /* flex-flow: column; */
+    margin: -4px 0;
+    padding: 0;
+    line-height: 28px;
+    /* border: 1px solid green; */
+}
+.discount{
+    /* color: ; */
+}
+
+.card1 a{
+    text-decoration: none;
+    color: black;
+}
+
+.card1:hover{
+    box-shadow: 0 0 8px rgba(130, 130, 130, 0.4);
+}
+
+.card1:hover .btn2,
+.card1:hover .btn1{
+    background: #ff6c6c;
+    visibility: visible;
+}
+
+.card1:hover .addtowishlist{
+    margin-top: -10px;
+    height: 16%;
+    visibility: visible;
+}
+
+.addtowishlist{
+    margin: 0;
+    width: 100%;
+    height: 13%;
+    display: flex;
+    background: white;
+    position: absolute;
+    z-index: 1;
+    visibility: hidden;
+}
+.addtowishlist input{
+    height: 28px;
+    width: 85%;
+    margin: 0.5rem auto;
+    /* border: transparent; */
+    /* border-color: #acacac; */
+    border-color: whitesmoke;
+    outline: none!important;
+    background: transparent;
+}
+
+.addtowishlist input:hover{
+    border-color: black;
+}
+.plus{
+    /* color: #ebebeb; */
+    position: absolute;
+    color: aliceblue;
+    top: -0.32rem;
+    right: 0.45rem;
+    font-size: 1.42rem;
+    font-weight: 600;
+}
+
+.btn1>i{
+    color: #f8f8ff;
+    font-size: 0.85rem;
+}
+
+.top1{
+    margin-top: 10px;
+}
+
+.not-found-img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 3rem auto;
+}
+
+.not-found-item-word{
+    display: flex;
+    align-items: center;
+    font-size: large;
+    font-weight: 600;
+    color: #fc4a4a;
+}
+
+.not-found-suggest,.not-found-section{
+    /* border: 1px solid green; */
+    display: flex;
+    width: 100%;
+    font-weight: 600;
+    justify-content: center;
+    align-items: center;
+}
+
+.not-found-suggest{
+    text-align: center;
+    font-size: small;
+    margin-top: 0.8rem;
+}
+
+.bookmark-title{
+    font-weight: 500;
+    margin: 2rem 0;
+    font-family: 'Roboto','Times New Roman', Times, serif;
+    text-align: center;
+    color: #575555;
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.shake {
+  animation: shake 0.3s;
+  animation-iteration-count: 2;
+  border: 20px solid green!important;
+}
+
+.ok{
+  border: 20px solid orange;
+  padding: 2rem;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 0px) rotate(0deg); }
+  10% { transform: translate(-1px, 0px) rotate(0deg); }
+  20% { transform: translate(-3px, 0px) rotate(0deg); }
+  30% { transform: translate(3px,0px) rotate(0deg); }
+  40% { transform: translate(1px, 0px) rotate(0deg); }
+  50% { transform: translate(-1px, 0px) rotate(0deg); }
+  60% { transform: translate(-3px, 0px) rotate(0deg); }
+  70% { transform: translate(3px, 0px) rotate(0deg); }
+  80% { transform: translate(-1px, 0px) rotate(0deg); }
+  90% { transform: translate(1px, 0px) rotate(0deg); }
+  100% { transform: translate(1px, 0px) rotate(0deg); }
+}
+</style>
+</head>
+<body>
+
+<p>Hover over the image:</p>
+<div class="ok" id="ok"><button>HMMM</button></div>
+<button id="button" onclick="hmm()">Shit</button>
+<script>
+    function shake(){
+      event.stopPropagation();
+
+        var u = document.getElementById("ok");
+        if(u.classList.contains("shake")){
+            u.classList.remove("shake");
+        }
+        u.classList.add('shake');
+        setTimeout(function(){
+        	u.classList.remove('shake');
+        }, 500);
+s    }
+
+    // ele = document.getElementById("button");
+
+    // reset the transition by...
+    // ele.addEventListener("click", function(e) {
+    // function hmm(e) {
+    // e.preventDefault;
+    // alert("hmm");
+    // let element = getElementById("ok");
+
+    // // -> removing the class
+    // element.classList.remove("shake");
+    
+    // // -> triggering reflow /* The actual magic */
+    // // without this it wouldn't work. Try uncommenting the line and the transition won't be retriggered.
+    // // Oops! This won't work in strict mode. Thanks Felis Phasma!
+    // // element.offsetWidth = element.offsetWidth;
+    // // Do this instead:
+    // void element.offsetWidth;
+    
+    // // -> and re-adding the class
+    // element.classList.add("shake");
+    // }, false);
+</script>
+</body>
+</html>
