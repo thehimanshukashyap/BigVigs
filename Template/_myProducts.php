@@ -49,7 +49,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 <div class="cardBody1">
                     <div class="top1"><span class="title"><?php $name = $row['item_brand']; echo $row['item_brand'];?></span><br>
 
-                    <p>
+                    <p style="white-space:nowrap;word-wrap:break-word;overflow:hidden;text-overflow:ellipsis; width:160px;">
                     <?php
                         $subCat = '';
                         $sql3 = "SELECT * from subcategory where subcat_id = ".$row['item_subcat'];

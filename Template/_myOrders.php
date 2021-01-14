@@ -1,7 +1,7 @@
 <?php
-$shop_id = $user_id = '';
+$shop_id = $user_id = $sureItemId = '';
 
-  if(isset($_POST['cancelOrder'])){
+  if(isset($_POST['sureCancelOrder'])){
     $itemid = $_POST['item_id'];
     $sql = "UPDATE `cart` SET `order_status` = '2' WHERE `cart`.`user_id` = ".$_SESSION['user_id']." and `cart`.`item_id` = '$itemid';";
     mysqli_query($con,$sql);
@@ -11,7 +11,6 @@ $shop_id = $user_id = '';
     $sql = "UPDATE `cart` SET `order_status` = '4' WHERE `cart`.`user_id` = ".$_SESSION['user_id']." and `cart`.`item_id` = '$itemid';";
     mysqli_query($con,$sql);
   }
-
 
 ?>
     <!-- Product display section starts -->
@@ -31,6 +30,7 @@ $shop_id = $user_id = '';
   if($resultcheck > 0){
     while($row = mysqli_fetch_assoc($result)){
       $table = $row['item_catagory'];
+      $item_id = $row['item_id'];
       
         ?>
 
@@ -38,7 +38,7 @@ $shop_id = $user_id = '';
             <div class="card1 border">
                 <a href="<?php printf('%s?item_id=%s','product.php',$row['item_id'])?>">
                 <div class="imgBox1">
-                    <img src="<?php echo $row['item_img']?>" alt="">
+                    <img src="<?php echo $row['item_img']?>" alt="" id="<?php echo $item_id."Image";?>">
                 </div>
                 <div class="cardBody1">
                     <div class="top1"><span class="title"><?php $name = $row['item_brand']; echo $row['item_brand'];?></span><br>
@@ -87,7 +87,10 @@ $shop_id = $user_id = '';
                       if($OrderStatus['order_status'] == 1){
                         ?>
                         <div class="text-center" style="background: #f8f8ff;">
-                          <button class="my-2 mb-3" name="cancelOrder" style="width: 80%; border: 1px solid black; background: transparent;">Cancel Order</button>
+
+                        <!-- cancel order button -->
+
+                          <button class="my-2 mb-3 cancelOrder" name="cancelOrder" id="<?php echo $item_id;?>" style="width: 80%; border: 1px solid black; background: transparent;" data-toggle="modal" data-target="#myModal" data-id="<?php echo $item_id; ?>" onclick="confirmDelete(this);">Cancel Order</button>
                         </div>
                         <?php
                       }
@@ -106,7 +109,7 @@ $shop_id = $user_id = '';
                           $date = strtotime($date);
                           if(($date - $dbDate) <= 10){
                             ?>
-                            <button class="my-2 mb-3" name="returnOrder" style="width: 80%; border: 1px solid black; background: transparent;" ><span>Return Order</span></button>
+                            <button class="my-2 mb-3" name="returnOrder" style="width: 80%; border: 1px solid black; background: transparent;" data-toggle="modal" data-target="#exampleModal"><span>Return Order</span></button>
                         </div>
 
                         <?php
@@ -120,8 +123,22 @@ $shop_id = $user_id = '';
                 ?>
                 
               </div>
-        </div>        
+        </div>
 
+        <!-- Modal Starts -->
+        <div id="myModal" class="modal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body card p-0 m-0">
+                <?php include_once 'CancelOrderConfirmationBox.php';?>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal Ends -->
+
+
+        
         <?php
     }
   }
@@ -147,5 +164,21 @@ $shop_id = $user_id = '';
 
   ?>
 </div>
+<script>
+
+  $(".cancelOrder").click(function(event){
+    event.preventDefault();
+  });
+
+  function confirmDelete(self) {
+		var id = self.getAttribute("data-id");
+    document.getElementById("ConfirmItemId").value = id;
+    src = "#"+id+"Image";
+    ModalImgae = $(src).attr('src');
+    $("#ModalProductImgae").attr('src',ModalImgae);
+    $("#myModal").modal("show");
+    
+	}
+</script>
 
 <!-- Product display section ends -->   

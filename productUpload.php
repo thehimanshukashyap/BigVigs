@@ -181,9 +181,16 @@ session_start();
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-12">
+                                <label for="mainProdImage">Banner Image</label>
+                                <input type="file" name="mainProdImage" id="mainProdImage" value=""/>
+                                <p style="color: red; font-size: small;" id="mainProdImgError"></p>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
-                                <label for="uploadfile">Product Image</label>
-                                <input type="file" name="uploadfile" id="uploadfile" value=""/>
+                                <label for="uploadfile">Other Images</label>
+                                <input type="file" name="uploadfile[]" id="uploadfile" value="" multiple/>
                                 <p style="color: red; font-size: small;" id="prodImgError"></p>
                               </div>
                               <div class="col-md-6">
@@ -413,7 +420,7 @@ $("#submit").click(function(event){
     prodCategory = $("#prodCategory").val();
     prodSubCategory = $("#prodSubCategory").val();
     stock = $("#stock").val();
-    uploadfile = $("#uploadfile")[0].files;
+    mainProdImage = $("#mainProdImage")[0].files;
 
     if(prodBrand === null || prodGender === null || mrp === null || price === null || prodCol === null || prodSize === null || prodCategory === null || prodSubCategory === null || stock === null || prodBrand === '' || prodGender === '' || mrp === '' || price === '' || prodCol === '' || prodSize === '' || prodCategory === '' || prodSubCategory === '' || stock === ''){
         validate = false;
@@ -483,6 +490,11 @@ $("#submit").click(function(event){
     if(validate){
         var fd = new FormData();
 
+        var totalfiles = document.getElementById('uploadfile').files.length;
+        for (var index = 0; index < totalfiles; index++) {
+            fd.append("uploadfile[]", document.getElementById('uploadfile').files[index]);
+        }
+
         fd.append('prodUpload','fetch_data');
         fd.append('prodBrand',prodBrand);
         fd.append('prodGender',prodGender);
@@ -493,7 +505,7 @@ $("#submit").click(function(event){
         fd.append('prodCategory',prodCategory);
         fd.append('prodSubCategory',prodSubCategory);
         fd.append('stock',stock);
-        fd.append('uploadfile',uploadfile[0]);
+        fd.append('mainProdImage',mainProdImage[0]);
 
         $.ajax({
             url:"action.php",
@@ -502,7 +514,6 @@ $("#submit").click(function(event){
             contentType: false,
             processData: false,
             success: function(data){
-                alert(data);
                 if(data == 1){
                     location.replace("catUp.php");
                 }

@@ -44,7 +44,7 @@
                     
                     $sql = "INSERT INTO `user` (`user_name`, `user_email`, `user_address`, `user_dob`, `user_free_trial`, `pass`, `user_contact1`, `user_image`) VALUES ('$fullname', '$user_email', '', '$user_dob', '0', '$pass', '$user_contact','$user_image' )";
                     mysqli_query($con,$sql);
-                    echo $sql;
+                    // echo $sql;
                     
                     $sql = "SELECT user_id FROM user where user_email = '$user_email' and user_dob = '$user_dob';";
                     $result = mysqli_query($con,$sql);
@@ -89,16 +89,16 @@
                     
                     $sqlInfo = "SELECT * from shopinfo where shopEmail = '$shopEmail' and shopContact1 = '$shopContact1';";
                     $result = mysqli_query($con,$sqlInfo);
-                    echo "<br>".$sqlInfo;
+                    // echo "<br>".$sqlInfo;
                     ?>
                     <input type="text" value="<?php echo $sqlInfo;?>">
                     <?php
                     while($row = mysqli_fetch_assoc($result)){
                         $_SESSION['shop_id'] = $row['shopId'];
-                        echo "This is shopId on line 92".$row['shopId']."<br>";
+                        // echo "This is shopId on line 92".$row['shopId']."<br>";
                     }
-                    echo "This is shopInfo: ". $_SESSION['shop_id']."<br>";
-                    echo $sqlShopSignUp;
+                    // echo "This is shopInfo: ". $_SESSION['shop_id']."<br>";
+                    // echo $sqlShopSignUp;
                     ?>
                     <input type="text" value="<?php echo $sqlShopSignUp; ?>">
                     <?php

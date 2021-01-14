@@ -1,6 +1,7 @@
 <?php
     session_start();
     include_once 'database/DBController.php';
+    $upload_location = "trialimage/";
 
     extract($_POST);
 
@@ -300,11 +301,54 @@
             $spectable =1;
         }
 // ----------------To move upload files----------------------------------
-        $file_name = $_FILES['uploadfile']['name'];
-        $file_type = $_FILES['uploadfile']['type'];
-        $file_size = $_FILES['uploadfile']['size'];
-        $file_temp_loc = $_FILES['uploadfile']['tmp_name'];
-        $file_store = "trialimage/".$file_name;
+        $countfiles = count($_FILES['uploadfile']['name']);
+        $files_arr = array();
+        
+
+        
+
+
+        for($index = 0;$index < $countfiles;$index++){
+
+            if(isset($_FILES['uploadfile']['name'][$index]) && $_FILES['uploadfile']['name'][$index] != ''){
+               // File name
+               $filename = $_FILES['uploadfile']['name'][$index];
+            
+            // Get extension
+            $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+            $filename = 'productImages'.time().$shop.$index.'.'.$ext;
+         
+               // Valid image extension
+               $valid_ext = array("png","jpeg","jpg");
+         
+               // Check extension
+               if(in_array($ext, $valid_ext)){
+         
+                  // File path
+                  $path = $upload_location.$filename;
+         
+                  // Upload file
+                  if(move_uploaded_file($_FILES['uploadfile']['tmp_name'][$index],$path)){
+                     $files_arr[] = $path;
+                  }
+               }
+            }
+         }
+         
+
+        $filesArr = serialize($files_arr);
+
+
+
+
+
+        $file_name = $_FILES['mainProdImage']['name'];
+        $extension = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+        $file_type = $_FILES['mainProdImage']['type'];
+        $file_size = $_FILES['mainProdImage']['size'];
+        $file_temp_loc = $_FILES['mainProdImage']['tmp_name'];
+        $file_name = 'productMainImg'.time().$shop.'.'.$extension;
+        $file_store = $upload_location.$file_name;
         move_uploaded_file($file_temp_loc,$file_store);
 
 
@@ -314,8 +358,9 @@
 // ----------------Upload files Ends------------------------------------
 
         $cat = $_POST["prodCategory"];
-        $sql = "INSERT INTO `product` (`shopId`, `item_brand`, `item_img`, `item_gender`, `item_mrp`, `item_price`, `item_col`, `item_size`, `item_catagory`,`item_subcat` ,
-        `item_stock`, `rp`, `discount`) VALUES ('$shop', '$itemBrand', '$file_store', '$itemGender', '$itemMrp', '$itemPrice', '$itemCol', '$serializedSize', '$itemCat', '$itemSubCat',
+ 
+        $sql = "INSERT INTO `product` (`shopId`, `item_brand`, `item_img`, `item_images`, `item_gender`, `item_mrp`, `item_price`, `item_col`, `item_size`, `item_catagory`,`item_subcat` ,
+        `item_stock`, `rp`, `discount`) VALUES ('$shop', '$itemBrand', '$file_store','$filesArr', '$itemGender', '$itemMrp', '$itemPrice', '$itemCol', '$serializedSize', '$itemCat', '$itemSubCat',
         '$itemStock', '$rp','$discount');";
         $res = mysqli_query($con,$sql);
         // if($cat==1){
@@ -374,7 +419,7 @@
            $file_type = $_FILES['userImgUpload']['type'];
            $file_size = $_FILES['userImgUpload']['size'];
            $file_temp_loc = $_FILES['userImgUpload']['tmp_name'];
-           $file_store = "trialimage/".$file_name;
+           $file_store = $upload_location.$file_name;
            move_uploaded_file($file_temp_loc,$file_store);
        }
        
@@ -423,7 +468,7 @@
            $file_type = $_FILES['shopImgUpload']['type'];
            $file_size = $_FILES['shopImgUpload']['size'];
            $file_temp_loc = $_FILES['shopImgUpload']['tmp_name'];
-           $file_store = "trialimage/".$file_name;
+           $file_store = $upload_location.$file_name;
            move_uploaded_file($file_temp_loc,$file_store);
        }
        
@@ -468,6 +513,7 @@
                         session_start();
                         $_SESSION['full_name'] = $row['user_name'];
                         $_SESSION['user_id'] = $row['user_id'];
+                        $_SESSION['user_image'] = $row['user_image'];
                         echo 1;
                     }
                     else{

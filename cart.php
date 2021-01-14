@@ -1,6 +1,7 @@
 <?php include_once 'header.php';?>
 <script>
     $('.CheckOutStage2').hide();
+    $("#confirmationBox").hide();
 function showNoti(){
     // alert("Ok i was called");
     let ele = document.getElementById("noti");
@@ -24,12 +25,12 @@ if($user==0){
 else
 {
     if($_SERVER['REQUEST_METHOD']=="POST"){
-        if(isset($_POST['deletefromcart'])){
+        if(isset($_POST['sureDeleteFromCart'])){
             $item_id = $_POST['item_id'];
             $sql = "DELETE FROM `cart` WHERE `cart`.`item_id` = $item_id and `cart`.`user_id` = $user; ";
             mysqli_query($con,$sql);
         }
-        if(isset($_POST['addtobookmark'])){
+        if( isset($_POST['addtobookmark']) || isset($_POST['sureAddtobookmark']) ){
             $item_id = $_POST['item_id'];
             $sql = "INSERT INTO `wishlist` (`item_id`, `user_id`) VALUES ('$item_id', '$user')";
             mysqli_query($con,$sql);
@@ -43,7 +44,6 @@ else
             $num= mysqli_num_rows($result);
 
             while($row = mysqli_fetch_assoc($result)){
-                echo $row['item_id'];
                 $q = "qty".$row['item_id'];
                 $qty = $price = "";
                 
@@ -107,7 +107,7 @@ else
             setcookie($p, time() - 3600);
             setcookie($q, time() - 3600);
 
-            head("myOrders.php");
+            head("index.php");
         }
 
         if(isset($_POST['addrRemoveBtn'])){
@@ -293,6 +293,13 @@ else
 ?>
 
 <script>
+
+    
+
+    $(".deletefromcart").click(function(e){
+        e.preventDefault();
+    });
+
 
     $("#proceedTransaction").click(function(event){
         event.preventDefault();

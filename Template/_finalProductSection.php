@@ -9,13 +9,14 @@
         $item_id = $row['item_id'];
         $table = $row['item_catagory'];
         $shopId = $row['shopId'];
+        // include 'HTML/ConfirmationBox.php';
         ?>
             
         <!-- Product display starts -->
 
             <div class="row py-3 mt-3 mx-auto cart-product-card p-0" style="border-left:1px solid lightgray; border-right:1px solid lightgray; border-top:1px solid lightgray; border-radius: 5px 5px 0 0;">
                 <div class="col-xl-3 col-lg-2 col-md-4 col-sm-4 col-4">
-                    <img src="<?php echo $row['item_img']?>" class="img-fluid cart-img" alt="">
+                    <img src="<?php echo $row['item_img']?>" class="img-fluid cart-img" alt="" id="<?php echo $row['item_id']."Image";?>">
                 </div>
                 <div class="col-xl-6 col-lg-7 col-md-8 col-sm-8 col-8 p-1">
                     <h5> <?php echo $row['item_brand']?>  </h5>
@@ -99,11 +100,11 @@
                     </div>
                 </div>
             </div>
-            <form method="post">
+            <form method="post" id="actionForm">
                 <div class="row mx-auto pt-1 cart-product-card" style="border-left:1px solid lightgray; border-right:1px solid lightgray; border-bottom:1px solid lightgray; border-radius: 0 0 5px 5px;">
-                    <input type="hidden" name="item_id" value="<?php echo $item_id; ?>">
-                    <input type="hidden" name="user_id" value="<?php echo $user; ?>">
-                    <div class="col-4 text-center ml-2 mb-2 border-top p-0"><button type="submit"name="deletefromcart" class=" btn px-3 border-right shadow-none" style="width: 100%; height:100%; font-size:1.05rem; font-weight: 600; color:#6e6e6e;">REMOVE</button></div>
+                    <input type="hidden" name="item_id" class="item_id" value="<?php echo $item_id; ?>">
+                    <input type="hidden" name="user_id" class="user_id" value="<?php echo $user_id; ?>">
+                    <div class="col-4 text-center ml-2 mb-2 border-top p-0"><button type="submit" name="dfromcart" id="" class="btn px-3 border-right shadow-none deletefromcart" style="width: 100%; height:100%; font-size:1.05rem; font-weight: 600; color:#6e6e6e;" data-toggle="modal" data-target="#myCartModal" data-id="<?php echo $item_id; ?>" onclick="confirmRemoveFromCart(this);" >REMOVE</button></div>
                     <div class="col text-center border-top mb-2 mr-2 p-0"><button type="submit" name="addtobookmark" class="btn shadow-none" style="width: 100%; height:100%; font-size:1.05rem; font-weight: 600; color:#6e6e6e">MOVE TO WISHLIST</button></div>
                 </div>
             </form>
@@ -113,9 +114,33 @@
 
         <!-- Product display ends -->
 
+        <!-- Modal Starts -->
+        <div id="myCartModal" class="modal">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body card p-0 m-0">
+                <?php include_once 'RemoveFromCartConfirmationBox.php';?>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!-- Modal Ends -->
+
+
     <?php
     }  
     ?>
         <a href="bookmark.php" style="color: black;"><div class="cart-product-card border mx-auto mt-3 py-3 px-3" style="display: flex;"><i class="far fa-bookmark my-auto" style="font-size: larger;"></i>&nbsp;&nbsp;<span style="font-weight: 500;">Add More From Wishlist</span><div class="ml-auto"><i class="fas fa-chevron-right" style="font-size: large;"></i></div></div></a>
 
 </div>
+
+<script>
+    function confirmRemoveFromCart(self) {
+		var id = self.getAttribute("data-id");
+        document.getElementById("ConfirmItemId").value = id;
+        src = "#"+id+"Image";
+        ModalImgae = $(src).attr('src');
+        $("#ModalProductImgae").attr('src',ModalImgae);
+        $("#myModal").modal("show");
+    }
+</script>

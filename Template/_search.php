@@ -373,7 +373,7 @@ if(isset($_POST['filter_submit'])){
         if(!isset($subcat)){
           ?>
           <div class="list-group">
-            <h3>Categorie</h3>
+            <h3>Categories</h3>
             <?php			
             $ram = $product->getRam();
             foreach($ram as $ramDetails){	
@@ -443,7 +443,7 @@ if(isset($_POST['filter_submit'])){
                     </div>
                     <div class="cardBody1">
                         <div class="top1"><span class="title"><?php $name = $row['item_brand']; echo $row['item_brand'];?></span><br>
-                        <p>
+                        <p style="white-space:nowrap;word-wrap:break-word;overflow:hidden;text-overflow:ellipsis; width:160px;">
                         <?php
                           $subCat = '';
                           $sql3 = "SELECT * from subcategory where subcat_id = ".$row['item_subcat'];
@@ -552,7 +552,7 @@ else
                     </div>
                     <div class="cardBody1">
                         <div class="top1"><span class="title"><?php $name = $row['item_brand']; echo $row['item_brand'];?></span><br>
-                        <p>
+                        <span style="text-overflow: ellipsis;">
                         <?php
                           $subCat = '';
                           $sql3 = "SELECT * from subcategory where subcat_id = ".$row['item_subcat'];
@@ -584,7 +584,7 @@ else
                             echo $fit." ".$occ." ".$subCat;
                           } 
                         ?>
-                        </p></div>
+                        </span></div>
                         <div class="priceSection"><span class="price">Rs <?php echo $row['item_price']?></span>&nbsp;&nbsp;<span class="strikedPrice"><small><s>Rs <?php echo $row['item_mrp']?></s></small></span>
                         <span class="discount"><small>(<?php echo $row['discount']?>% off)</small></span></div>
                     </div>

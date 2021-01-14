@@ -1,6 +1,8 @@
 <?php
     include_once 'noice.php';
     include_once 'database/DBController.php';
+    error_reporting(0);
+    error_reporting(E_ALL ^ E_NOTICE);
 
     $shop = $_SESSION['shop_id']??1;
     $sql = "SELECT item_id from product where rp in (SELECT rp from shopinfo where shopId = $shop) and shopId = $shop;";
@@ -61,7 +63,7 @@
                     '$pattern',
                     '$patternType',
                     '$fabric');";
-                    echo "This is on line 64 of catDown.php ".$sql;
+                    // echo "This is on line 64 of catDown.php ".$sql;
             mysqli_query($con,$sql);
             head("shopProfile.php");
         }
@@ -212,10 +214,15 @@
                                 <div class="flyTypeSuggest"></div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-sm-12">
+                                <label for="">Fabric : </label><br>
+                                <input type="text" name="fabric" id="fabricVal" placeholder="ex: Full sleeve" onfocus="getSuggestData('fabric')" class="form-control">
+                                <div class="fabricSuggest"></div>
+                            </div>
+                            <!-- <div class="col-xl-6 col-lg-6 col-sm-12">
                                 <label for="">Main Trend : </label><br>
                                 <input type="text" name="mainTrend" id="mainTrendVal" placeholder="ex: Full sleeve" onfocus="getSuggestData('mainTrend')" class="form-control">
                                 <div class="mainTrendSuggest"></div>
-                            </div>
+                            </div> -->
                         </div> 
                         <div class="row">
                             <div class="col-lg-6 col-xl-6 col-sm-12">
@@ -229,7 +236,7 @@
                                 <div class="pleatSuggest"></div>
                             </div>
                         </div> 
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-lg-6 col-xl-6 col-sm-12">
                                 <label for="">Type : </label><br>
                                 <input type="text" name="type" id="typeVal" placeholder="ex: Full sleeve" onfocus="getSuggestData('type')" class="form-control">
@@ -252,7 +259,7 @@
                                 <input type="text" name="fabric" id="fabricVal" placeholder="ex: Full sleeve" onfocus="getSuggestData('fabric')" class="form-control">
                                 <div class="fabricSuggest"></div>
                             </div>
-                        </div> 
+                        </div>  -->
 
                         <br />
                         <div class="row">
@@ -283,7 +290,6 @@
             let val = $(this).val();
             let table = 'bottomspecification';
             let getSuggest = 'fetch_data';
-            // let getSuggesfadfaft = 'fetch_data';
             if( $(this).val() != ''){
                 $.ajax({
                     url: "action.php",

@@ -115,7 +115,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 <script>
     function shake(){
         event.stopPropagation();
-        // red();
         var u = document.getElementById("radioShake");
         if(u.classList.contains("shake")){
             u.classList.remove("shake");
@@ -127,12 +126,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     }
 </script>
 
-
-
-    <!-- <form method="post">
-      <input type="text" class="searchtext" placeholder="search" name="txt_searchbox">
-      <button name="btn_search"><i class="fas fa-search fa-lg search-button"></i></button>
-    </form> -->
     <!-- Product display section starts -->
     <h4 class="bookmark-title">Your Bookmarks</h4>
 <div class="container-fluid">
@@ -155,7 +148,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                       <img src="<?php echo $row['item_img']?>" alt="" class="img-fluid">
                   </div>
                   <div class="cardBody1">
-                      <!-- <div class="addtowishlist"><input type="button" class="btn_addtowishlist" value="Wishlist"></div> -->
                       <div class="top1"><span class="title"><?php $name = $row['item_brand']; echo $row['item_brand'];?></span><br>
                       <?php
                           $subCat = '';
@@ -194,67 +186,56 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                       <span class="discount"><small>(60% off)</small></span></div>
                   </div>
                   </a>
-                  <!-- <form method='post' action=""> -->
                     <input type="text" id="item_id" value="<?php echo $row['item_id'];?>" name="item_id" hidden>
                     <input type="text" id="shop_id" value="<?php echo $row['shopId'];?>" name="shop_id" hidden>
                     <div class="text-center mb-3" style="background-color: #f8f8ff;">
                       <button name="moveToCart" id="moveToCart" style="border: 0.01rem solid black; width: 80%; font-weight:600;"  data-toggle="modal" data-target="#exampleModal" class="mt-2 mb-3 mx-auto text-center prodEditBtn">MOVE TO BAG</button>
                     </div>
                     <button class="btn2" name="removeWishlist"><span class="plus">-</span></button>
-                  <!-- </form> -->
-                  <!-- <button class="btn1"><i class="fas fa-shopping-bag iconbag"></i></button> -->
               </div>
           </div>        
 
 
           <!-- Modal -->
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-          <div class="modal-content">
-          <div class="modal-header">
-              <h6 class="modal-title" id="exampleModalLabel">SELECT SIZE</h6>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-          <div class="modal-body">
-              
-          <div class="size my-3 p-0">
-            <!-- <h5 class="my-auto">Select Size: </h5><br> -->
-
-            <div class="radio-tile-group" id="radioShake">
-
-              <!-- <form action="" method="post"  style="display: flex;"> -->
-                <?php
-                $sqlProductSize = unserialize($row['item_size']);
-                foreach($sqlProductSize as $ProductSize){
-                  ?>
-
-                  <div class="input-container">
-                        <input class="radio-button" id="productSize" type="radio" name="productSize" value="<?php echo $ProductSize;?>"/>
-                        <div class="radio-tile" id="radioBorder">
-                            <label for="walk" class="radio-tile-label m-auto"><?php echo $ProductSize;?></label>
-                        </div>
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLabel">SELECT SIZE</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <div class="size my-3 p-0">
+                    <div class="radio-tile-group" id="radioShake">
+                      <!-- <form action="" method="post"  style="display: flex;"> -->
+                        <?php
+                        $sqlProductSize = unserialize($row['item_size']);
+                        // echo $row['item_id'];
+                        foreach($sqlProductSize as $ProductSize){
+                          ?>
+                          <div class="input-container">
+                                <input class="radio-button" id="productSize" type="radio" name="productSize" value="<?php echo $ProductSize;?>"/>
+                                <div class="radio-tile" id="radioBorder">
+                                    <label for="walk" class="radio-tile-label m-auto"><?php echo $ProductSize;?></label>
+                                </div>
+                          </div>
+                          <?php
+                        }
+                        ?>
+                        <!-- </form> -->
+                    </div>
                   </div>
-
-                  <?php
-                }
-                ?>
-                <!-- </form> -->
-
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="moveToBag" name="moveToBag" class="btn btn-lg btn-block shadow-none" style="font-weight: 500; font-size:0.9rem; color: white; background-color: tomato;">MOVE TO BAG</button>
+                    <p style="color: red; font-size:small;" id="Error"></p>
+                </div>
+              </div>
             </div>
-                
-        </div>
-
           </div>
-          <div class="modal-footer">
-              <button type="button" id="moveToBag" name="moveToBag" class="btn btn-lg btn-block shadow-none" style="font-weight: 500; font-size:0.9rem; color: white; background-color: tomato;">MOVE TO BAG</button>
-              <p style="color: red; font-size:small;" id="Error"></p>
-          </div>
-          </div>
-      </div>
-  </div>
 
 
 
@@ -270,16 +251,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         <p class="not-found-suggest">We have various local products which are very amazing. Lets explore your local store on this site.</p>
       <?php
     } 
-  // } 
-  // else
-  // {
-  //   //Main Banner Starts
-  //   include 'Template/similarproducts.php';
-  //   //Main Banner Ends
-  //   // seasonal sale starts
-  //   include 'Template/_seasonalSale.php';
-  //   // seasonal sale ends
-  // }
     ?>
   </div>
 </div>

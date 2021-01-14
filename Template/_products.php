@@ -193,28 +193,36 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
             <div class="row">
                 <div class="col-sm-7 p-0">
                     <div class="owl-carousel owl-theme top-banner-div smallImage m-0">
-                            <!-- <div id="topbanner1" class="top-banner mt-2"></div>
-                            <div id="topbanner2" class="top-banner mt-2"></div>
-                            <div id="topbanner3" class="top-banner mt-2"></div>
-                            <div id="topbanner4" class="top-banner mt-2"></div> -->
-                            <img src="<?php echo $row['item_img']?>" alt="" class="productViewCarousel">
-                            <img src="<?php echo $row['item_img']?>" alt="" class="productViewCarousel">
-                            <img src="<?php echo $row['item_img']?>" alt="" class="productViewCarousel">
-                            <img src="<?php echo $row['item_img']?>" alt="" class="productViewCarousel">
+                        <img src="<?php echo $row['item_img']?>" alt="" class="productViewCarousel">
+                        <?php
+                            $imageArray = unserialize($row['item_images']);
+                            foreach($imageArray as $img){
+                                ?>
+                                <img src="<?php echo $img?>" alt="" class="productViewCarousel">
+                                <?php
+                            }
+                        ?>
                     </div>
                     <div class="row mx-0 bigImage">
                         <div class="col-6 p-1">
                             <img src="<?php echo $row['item_img']?>" class="img-fluid" alt="" style="width: 100%; height: 70vh;">
                         </div>
-                        <div class="col-6 p-1">
-                            <img src="<?php echo $row['item_img']?>" class="img-fluid" alt="" style="width: 100%; height: 70vh;">
-                        </div>
-                        <div class="col-6 p-1">
-                            <img src="<?php echo $row['item_img']?>" class="img-fluid" alt="" style="width: 100%; height: 70vh;">
-                        </div>
-                        <div class="col-6 p-1">
-                            <img src="<?php echo $row['item_img']?>" class="img-fluid" alt="" style="width: 100%; height: 70vh;">
-                        </div>
+                        <?php
+                            $imageArray = array();
+                            $sqlImages = "SELECT item_images from product where item_id = ".$item_id;
+                            $resultSqlImgaes = mysqli_query($con,$sqlImages);
+                            while($rowImgaes = mysqli_fetch_assoc($resultSqlImgaes)){
+                                $imageArray = unserialize($rowImgaes['item_images']);
+                            }
+                            foreach($imageArray as $image){
+                                ?>
+                                 <div class="col-6 p-1">
+                                     <img src="<?php echo $image;?>" class="img-fluid" alt="" style="width: 100%; height: 70vh;">
+                                 </div>
+                                 <?php
+                            }
+                            
+                        ?>
                     </div>
                 </div>
                 <div class="col-sm-5 my-2 px-4">
@@ -308,18 +316,58 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
                             
                     </div>
 
-                    <div class="form-row pt-3">
+                    <div class="form-row pt-3 smallPageCTA">
+                        <div class="col">
+                            <button class="btn btn-block shadow-none" name="addtoWishlist" style="border: 1px solid gray; padding: 0.7rem 0;">WISHLIST</button>
+                        </div>
                         <div class="col">
                             <input type="hidden" name="item_id" id="item_id" value="<?php echo $item_id; ?>">
                             <input type="hidden" name="shop_id" id="shop_id" value="<?php echo $row['shopId']; ?>">
-                            <button class="btn btn-danger btn-block" name="addtocart" id="addtocart" style="padding: 0.7rem 0;">Add to Cart</button>
+
+                            <?php
+                                $sqlCartCheck = "SELECT * from cart where order_status = 0 and item_id = ".$item_id;
+                                $CartCheckResult = mysqli_query($con,$sqlCartCheck);
+                                if(mysqli_num_rows($CartCheckResult) == 0){
+                                    ?>
+                                    <button class="btn btn-danger btn-block shadow-none" name="addtocart" id="addtocartSmallPageCTA" style="padding: 0.7rem 0;">Add to Cart</button>
+                                    <?php
+                                }
+                                else{
+                                    ?>
+                                    <a href="cart.php" class="btn btn-danger btn-block shadow-none" name="gotocart" id="gotocart" style="padding: 0.7rem 0;">Go to Cart</a>
+                                    <?php
+                                }
+                            ?>
+
+                            
+                        </div>                        <!-- </div> -->
+                    </div>
+                    <div class="form-row pt-3 largePageCTA"> 
+                        <div class="col">
+                            <input type="hidden" name="item_id" id="item_id" value="<?php echo $item_id; ?>">
+                            <input type="hidden" name="shop_id" id="shop_id" value="<?php echo $row['shopId']; ?>">
+                            <!-- <button class="btn btn-danger btn-block shadow-none" name="addtocart" id="addtocart" style="padding: 0.7rem 0;">Add to Cart</button> -->
+
+                            <?php
+                                $sqlCartCheck = "SELECT * from cart where order_status = 0 and item_id = ".$item_id;
+                                $CartCheckResult = mysqli_query($con,$sqlCartCheck);
+                                if(mysqli_num_rows($CartCheckResult) == 0){
+                                    ?>
+                                    <button class="btn btn-danger btn-block shadow-none" name="addtocart" id="addtocartLargePageCTA" style="padding: 0.7rem 0;">Add to Cart</button>
+                                    <?php
+                                }
+                                else{
+                                    ?>
+                                    <a href="cart.php" class="btn btn-danger btn-block shadow-none" name="gotocart" id="gotocart" style="padding: 0.7rem 0;">Go to Cart</a>
+                                    <?php
+                                }
+                            ?>
+
+
                         </div>
                         <div class="col">
-                            <button class="" name="addtoWishlist" style="border: 1px solid gray; padding: 0.7rem 3rem; border-radius: 5px; width:100%; color:black; font-weight:600; font-size:medium;">WISHLIST</button>
+                        <button class="btn btn-block shadow-none" name="addtoWishlist" style="border: 1px solid gray; padding: 0.7rem 0;">WISHLIST</button>
                         </div>
-                        <!-- <div class="col">
-                            <button class="" name="addtoWishlist" style="border: 1px solid gray; padding: 0.7rem 3rem; border-radius: 5px; width:100%; color:black; font-weight:600; font-size:medium;">FREE TRIAL</button>
-                        </div> -->
                     </div>
 
 
@@ -486,7 +534,7 @@ while($row = mysqli_fetch_assoc($result)){
 
 <!-- Product display starts -->
 <script>
-    $("#addtocart").click(function(event){
+    $("#addtocartSmallPageCTA,#addtocartLargePageCTA").click(function(event){
         event.preventDefault();
         addtocart = "fetch_data";
         item_id = $("#item_id").val()

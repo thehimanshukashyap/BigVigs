@@ -1,5 +1,7 @@
 <?php
     include_once 'header.php';
+    error_reporting(0);
+    error_reporting(E_ALL ^ E_NOTICE); 
     $shop = $_SESSION['shop_id'];
         $sql = "SELECT item_id from product where rp in (SELECT rp from shopinfo where shopId = $shop) and shopId = $shop;";
     $result = mysqli_query($con,$sql);
@@ -40,9 +42,8 @@
 
             mysqli_query($con,$sql);
             ?>
-            <input type="text" value="<?php echo $sql;?>">
             <?php
-            echo $sql;
+            // echo $sql;
             head("shopProfile.php");
         }
 
@@ -202,17 +203,17 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-6 col-xl-6 col-sm-12">
-                                <label for="">Front Styling : </label><br>
-                                <input type="hidden" name="" class="frontStylingVal" value="frontStyling">
-                                <input type="text" name="frontStylingVal" id="frontStylingVal" placeholder="ex: Full sleeve" onfocus="SuggestData('length')" class="form-control">
-                                <div class="frontStylingSuggest"></div>
-                            </div>
                             <div class="col-xl-6 col-lg-6 col-sm-12">
                                 <label for="">Pockets : </label><br>
                                 <input type="hidden" name="" class="pocketsVal" value="pockets">
                                 <input type="text" name="pocketsVal" id="pocketsVal" placeholder="ex: Full sleeve" onfocus="getSuggestData('pockets')" class="form-control">
                                 <div class="pocketsSuggest"></div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-sm-12">
+                                <label for="">Pattern Coverage : </label><br>
+                                <input type="hidden" name="" class="patternCoverageVal" value="patternCoverage">
+                                <input type="text" name="patternCoverageVal" id="patternCoverageVal" placeholder="ex: Full sleeve" onfocus="getSuggestData('patternCoverage')" class="form-control">
+                                <div class="patternCoverageSuggest"></div>
                             </div>
                         </div> 
                         <div class="row">
@@ -229,20 +230,6 @@
                                 <div class="closureSuggest"></div>
                             </div>
                         </div> 
-                        <div class="row">
-                            <div class="col-lg-6 col-xl-6 col-sm-12">
-                                <label for="">Type : </label><br>
-                                <input type="hidden" name="" class="typeVal" value="type">
-                                <input type="text" name="typeVal" id="typeVal" placeholder="ex: Full sleeve" onfocus="getSuggestData('type')" class="form-control">
-                                <div class="typeSuggest"></div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-sm-12">
-                                <label for="">Pattern Coverage : </label><br>
-                                <input type="hidden" name="" class="patternCoverageVal" value="patternCoverage">
-                                <input type="text" name="patternCoverageVal" id="patternCoverageVal" placeholder="ex: Full sleeve" onfocus="getSuggestData('patternCoverage')" class="form-control">
-                                <div class="patternCoverageSuggest"></div>
-                            </div>
-                        </div>  
 
                         <br />
                         <div class="row">

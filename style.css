@@ -8,30 +8,36 @@
 }
 
 .sidebar{
+  top: 0!important;
   position: fixed;
   width: 250px;
   height: 100%;
   left: -250px;
   z-index: 3!important;
   overflow-x: hidden;
-  background: #1b1b1b!important;
+  /* background: #1b1b1b!important; */
+  background: whitesmoke!important;
   transition: left 0.4s ease;
   border-radius: 0px!important;
+  z-index: 10!important;
 }
 .sidebar.show{
   left: 0px;
 }
 .sidebar .text{
-  color: white;
+  color: #1e1e1e;
+  /* color: white; */
   font-size: 25px;
   font-weight: 600;
   line-height: 65px;
   text-align: center;
-  background: #1e1e1e;
+  background: whitesmoke;
+  /* background: #1e1e1e; */
   letter-spacing: 1px;
 }
 nav ul{
-  background: #1b1b1b;
+  /* background: #1b1b1b; */
+  background: white;
   height: 100%;
   width: 100%;
   list-style: none;
@@ -40,12 +46,24 @@ nav ul li{
   line-height: 60px;
   border-top: 1px solid rgba(255,255,255,0.1);
 }
+
+
 nav ul li:last-child{
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid lightgray;
+  /* border-bottom: 1px solid rgba(255,255,255,0.05); */
 }
+.sidebarProfileInfo{
+  border-bottom: 1px solid lightgray;
+  /* box-shadow: inset 1px 1px 0px lightgray,inset -1px 1px 0px lightgray,inset 1px -1px 8px lightgray,inset -1px -1px 0px lightgray; */
+}
+.shortCutLinks a{
+  font-size: medium;
+}
+
+
 nav ul li a{
   position: relative;
-  color: white;
+  color: black;
   text-decoration: none!important;
   font-size: 18px;
   padding-left: 40px;
@@ -55,12 +73,16 @@ nav ul li a{
   border-left: 3px solid transparent;
 }
 nav ul li.active a{
-  color: cyan;
-  background: #1e1e1e;
-  border-left-color: cyan;
+  color: black;
+  /* color: cyan; */
+  /* background: white; */
+  /* background: #1e1e1e; */
+  border-left-color: tomato;
+  /* border-left-color: cyan; */
 }
 nav ul li a:hover{
-  background: #1e1e1e;
+  /* background: #1e1e1e; */
+  background: white;
 }
 nav ul ul{
   position: static;
@@ -76,21 +98,38 @@ nav ul ul ul{
 nav ul ul li{
   line-height: 42px;
   border-top: none;
+  /* background-color: pink; */
 }
-nav ul li ul li ul li a,nav ul ul li a{
+nav ul ul ul li{
+  padding-left: 3.5rem;
+}
+nav ul ul li a{ 
+  font-size: 17px;
+  color: black;
+  /* color: #e6e6e6; */
+  padding-left: 50px;
+}
+nav ul li ul li ul li a{
   font-size: 17px;
   color: #e6e6e6;
-  padding-left: 80px;
 }
+/* nav ul li ul li ul li a,nav ul ul li a{
+  font-size: 17px;
+  color: #e6e6e6;
+  padding-left: 0px;
+} */
 
 nav ul li.active ul li a{
-  color: #e6e6e6;
-  background: #1b1b1b;
+  color: black;
+  /* color: #e6e6e6!important; */
+  background: white;
   border-left-color: transparent;
 }
 nav ul ul li a:hover{
-  color: cyan!important;
-  background: #1e1e1e!important;
+  color: tomato!important;
+  /* color: cyan!important; */
+  background: white!important;
+  /* background: #1e1e1e!important; */
 }
 nav ul li a span{
   position: absolute;

@@ -1,8 +1,16 @@
-<nav class="sidebar">
-  <div class="closeBTN" style="height: 2rem; width: 2rem; background: yellow; position:absolute; right:0; top:0; margin: 2px 2px 0 0; display:flex; justify-content:center; align-items:center;">X</div>
-  <div class="text">Side Menu</div>
+<nav class="sidebar m-0 p-0">
   <ul>
-    <li class="active"><a href="#">Dashboard</a></li>
+    <li class="active sidebarProfileInfo" style="position: relative;">
+      <a href="<?php if(isset($_SESSION['user_id'])){echo 'userProfile.php';}else{echo 'userLogIn.php';}?>" style="" alt="" class="py-3">
+        <div>
+          <div>  <img src="<?php if(isset($_SESSION['user_id'])){echo $_SESSION['user_image'];}else{echo 'Images/imageProfile'.rand(1,6).'.png';}?>" alt="" style="height:3rem; width:3rem; border-radius: 100%; "></div>
+          <p style="font-size: medium; padding:0; margin-top:1rem; line-height:10px;">
+            <?php if(isset($_SESSION['user_id'])){echo $_SESSION['full_name'];}else{echo 'Hello Friend!';}?>
+          </p>
+        </div>
+      </a>
+    </li>
+    <div class="closeBTN" style="height: 2rem; width: 2rem; position:absolute; right:0; top:0; margin: 5px 5px 0 0; display:flex; justify-content:center; align-items:center;"><span style=" color:gray; font-size:2.2rem; font-weight:lighter">&times;</span></div>
 
     <li>
       <a href="#" class="sidebar-label-men" onclick="toggleSideViewOption('sidebarCat-men')">MEN
@@ -185,6 +193,20 @@
 
       </ul>
     </li>
-
+    <li style="border-top: 1px solid lightgray; border-bottom:none" class="shortCutLinks">
+      <a href="bookmark.php">Wishlist</a>
+    </li>
+    <li style=" border-bottom:none" class="shortCutLinks">
+      <a href="cart.php">My Cart</a>
+    </li>
+    <li style=" border-bottom:none" class="shortCutLinks">
+      <a href="myOrders.php">My Orders</a>
+    </li>
+    
+    <!-- <ul>
+      <li>
+        <a href="">My Orders</a>
+      </li>
+    </ul> -->
   </ul>
 </nav>

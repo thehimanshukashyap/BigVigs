@@ -1,3 +1,13 @@
+<?php
+    $sql = "SELECT addArr from user where user_id = ".$_SESSION['user_id'];
+    $result = mysqli_query($con,$sql);
+    $addArr= "";
+    while($row = mysqli_fetch_assoc($result)){
+        $addArr = $row;
+    }
+    $addArr = unserialize($addArr['addArr']);
+?>
+
 <div class="col-md-4 px-4 pt-3 mt-3">
     <input type="hidden" id="MRP" value="<?php echo $itemMRP;?>">
     <input type="hidden" id="DISCOUNT" value="<?php echo $itemMRP - $subtotal;?>">
@@ -18,6 +28,6 @@
     <p style="font-size: small; color:gray; margin-top:0.5rem;">Due to some security reasons Online Payment is not available on this site now.<br>Payment on delivery is available.</p>
     <button class="btn btn-block my-2 shadow-none CheckOutStage1"  name="proceedTransaction" id="proceedTransaction" style="font-weight: 600; color: white; background-color: tomato;">PROCEED</button>
     <!-- <form action="" method="post"> -->
-        <button class="btn btn-block my-2 shadow-none CheckOutStage2"  name="buy" id="buy" style="font-weight: 600; color: white; background-color: tomato;">BUY NOW</button>
-    </form>
+        <button class="btn btn-block my-2 shadow-none CheckOutStage2"  name="buy" id="buy" style="font-weight: 600; color: white; background-color: tomato;" <?php if( (is_array($addArr) && empty($addArr) ) ||( ( !is_array($addArr) && empty($addArr) ) ) ){echo 'disabled';} ?> >BUY NOW</button>
+    <!-- </form> -->
 </div>

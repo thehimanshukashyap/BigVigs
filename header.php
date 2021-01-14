@@ -1,4 +1,9 @@
-<?php include_once 'noice.php';?>
+<?php 
+    include_once 'noice.php';
+    error_reporting(0);
+    error_reporting(E_ALL ^ E_NOTICE); 
+    ini_set('error_reporting', E_ALL);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,6 +42,9 @@
             .smallImage{
                 display: none!important;
             }
+            .smallPageCTA{
+                display: none!important;
+            }
         }
         @media screen and (max-width: 1080px){
             .cart-counter{
@@ -49,6 +57,12 @@
                 margin-top: 0!important;
             }
             .bigImage{
+                display: none!important;
+            }
+            .smallPageCTA{
+                display: flex!important;
+            }
+            .largePageCTA{
                 display: none!important;
             }
         }
